@@ -112,8 +112,8 @@ function createPosts(){
                 profilePic[key].innerHTML = `
                 <div class="profile-no-image profile-pic">${postsAuthorImage}</div>
                 `
-                const imgHtml = document.getElementsByTagName('img');
-                imgHtml[key].remove();
+                // const imgHtml = document.getElementsByTagName('img').querySelectorAll('.profile-pic');
+                // imgHtml[key].remove();
         }
     }
     const likeBtn = document.querySelectorAll('.like-button');
