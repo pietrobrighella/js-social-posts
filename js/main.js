@@ -79,7 +79,6 @@ function createPosts(){
         }
         const postHtml = document.createElement('div');
         postHtml.className = 'post';
-        postHtml.setAttribute('id', postsId);
         postHtml.innerHTML = `
         <div class="post__header">
             <div class="post-meta">                    
@@ -99,7 +98,7 @@ function createPosts(){
         <div class="post__footer">
             <div class="likes js-likes">
                 <div class="likes__cta">
-                    <a class="like-button js-like-button" href="#${postsId}" data-postid="1">
+                    <a class="like-button js-like-button" data-postid="1">
                         <i class="like-button__icon fas fa-thumbs-up" aria-hidden="true"></i>
                         <span class="like-button__label">Mi Piace</span>
                     </a>
@@ -116,9 +115,16 @@ function createPosts(){
     for(let i = 0; i < likeBtn.length; i++){
         const likeCounter = document.getElementById('like-counter-' + posts[i].id)
         likeBtn[i].addEventListener('click', function(){
-            likeBtn[i].classList.add('like-button--liked');
-            posts[i].likes ++;
-            likeCounter.innerHTML = `<b id="like-counter-${posts[i].id}" class="js-likes-counter">${posts[i].likes}</b>`
+            if(likeBtn[i].classList.contains('like-button--liked')){
+                likeBtn[i].classList.remove('like-button--liked');
+                posts[i].likes --;
+                likeCounter.innerHTML = `<b id="like-counter-${posts[i].id}" class="js-likes-counter">${posts[i].likes}</b>`
+            } else {
+                likeBtn[i].classList.add('like-button--liked');
+                posts[i].likes ++;
+                likeCounter.innerHTML = `<b id="like-counter-${posts[i].id}" class="js-likes-counter">${posts[i].likes}</b>`
+            }
+            
         })
     }
 }
