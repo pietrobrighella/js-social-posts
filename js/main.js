@@ -8,7 +8,7 @@ const posts = [
             "image": "https://unsplash.it/300/300?image=15"
         },
         "likes": 80,
-        "created": "2021-06-25"
+        "created": "2022-06-25"
     },
     {
         "id": 2,
@@ -19,7 +19,7 @@ const posts = [
             "image": "https://unsplash.it/300/300?image=10"
         },
         "likes": 120,
-        "created": "2021-09-03"
+        "created": "2022-09-03"
     },
     {
         "id": 3,
@@ -30,7 +30,7 @@ const posts = [
             "image": "https://unsplash.it/300/300?image=20"
         },
         "likes": 78,
-        "created": "2021-05-15"
+        "created": "2022-05-15"
     },
     {
         "id": 4,
@@ -41,7 +41,7 @@ const posts = [
             "image": null
         },
         "likes": 56,
-        "created": "2021-04-03"
+        "created": "2022-04-03"
     },
     {
         "id": 5,
@@ -52,9 +52,12 @@ const posts = [
             "image": "https://unsplash.it/300/300?image=29"
         },
         "likes": 95,
-        "created": "2021-03-05"
+        "created": "2022-03-05"
     }
 ];
+const likedPost = [];
+
+createPosts();
 
 function createPosts(){
     const containerHtml = document.getElementById('container');
@@ -87,7 +90,7 @@ function createPosts(){
                 </div>
                 <div class="post-meta__data">
                     <div class="post-meta__author">${postsAuthorName}</div>
-                    <div class="post-meta__time">${postsCreated}</div>
+                    <div class="post-meta__time">${dateGenerator(postsCreated)}</div>
                 </div>                    
             </div>
         </div>
@@ -119,10 +122,14 @@ function createPosts(){
                 likeBtn[i].classList.remove('like-button--liked');
                 posts[i].likes --;
                 likeCounter.innerHTML = `<b id="like-counter-${posts[i].id}" class="js-likes-counter">${posts[i].likes}</b>`
+                likedPost.splice(posts[i], 1);
+                console.log(likedPost);
             } else {
                 likeBtn[i].classList.add('like-button--liked');
                 posts[i].likes ++;
                 likeCounter.innerHTML = `<b id="like-counter-${posts[i].id}" class="js-likes-counter">${posts[i].likes}</b>`
+                likedPost.push(posts[i].id);
+                console.log(likedPost);
             }
             
         })
@@ -138,4 +145,15 @@ function getFirstLetters(str) {
     return firstLettersJoin;
 }
 
-createPosts();
+function dateGenerator(dateInput){
+    const dateIn = dateInput;
+    const months = ["Gennaio", "Febbraio", "Marzo", "Aprile", "Maggio", "Giugno", "Luglio", "Agosto", "Settembre", "Ottobre", "Novembre", "Dicembre"];
+    const days = ["Domenica", "Lunedì", "Martedì", "Mercoledì", "Giovedì", "Venerdì", "Sabato"];
+    for (const key in posts) {
+        let datePost = new Date(dateIn);
+        let month = months[datePost.getMonth()];
+        let day = days[datePost.getDay()];
+        datePost = day + ' ' + datePost.getDate() + ' ' + month + ' ' + datePost.getFullYear()
+        return datePost;
+    }
+}
