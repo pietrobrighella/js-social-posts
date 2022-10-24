@@ -5,7 +5,7 @@ const posts = [
         "media": "https://unsplash.it/600/300?image=171",
         "author": {
             "name": "Phil Mangione",
-            "image": "https://unsplash.it/300/300?image=15"
+            "image": "https://i.pravatar.cc/300?img=63"
         },
         "likes": 80,
         "created": "2022-06-25"
@@ -16,7 +16,7 @@ const posts = [
         "media": "https://unsplash.it/600/400?image=112",
         "author": {
             "name": "Sofia Perlari",
-            "image": "https://unsplash.it/300/300?image=10"
+            "image": "https://i.pravatar.cc/300?img=24"
         },
         "likes": 120,
         "created": "2022-09-03"
@@ -27,7 +27,7 @@ const posts = [
         "media": "https://unsplash.it/600/400?image=234",
         "author": {
             "name": "Chiara Passaro",
-            "image": "https://unsplash.it/300/300?image=20"
+            "image": "https://i.pravatar.cc/300?img=36"
         },
         "likes": 78,
         "created": "2022-05-15"
@@ -49,7 +49,7 @@ const posts = [
         "media": "https://unsplash.it/600/400?image=534",
         "author": {
             "name": "Alessandro Sainato",
-            "image": "https://unsplash.it/300/300?image=29"
+            "image": "https://i.pravatar.cc/300?img=58"
         },
         "likes": 95,
         "created": "2022-03-05"
@@ -69,17 +69,7 @@ function createPosts(){
         let postsCreated = posts[key].created;
         let postsAuthorName = posts[key].author.name;
         let postsAuthorImage = posts[key].author.image;
-        // SISTEMARE
-        if(posts[key].author.image != null) {
-            postsAuthorImage = posts[key].author.image;
-            console.log(postsAuthorImage,'if');
-            } else {
-                postsAuthorImage = getFirstLetters(postsAuthorName);
-                const profilePic = document.querySelectorAll('.post-meta__icon');
-                profilePic.innerHTML = `
-                <span class="profile-no-image">${postsAuthorImage}</span>
-                `
-        }
+        
         const postHtml = document.createElement('div');
         postHtml.className = 'post';
         postHtml.innerHTML = `
@@ -113,6 +103,16 @@ function createPosts(){
         </div>            
         `
         containerHtml.appendChild(postHtml);
+
+        if(posts[key].author.image != null) {
+            postsAuthorImage = posts[key].author.image;
+            } else {
+                postsAuthorImage = getFirstLetters(postsAuthorName);
+                const profilePic = document.querySelectorAll('.post-meta__icon');
+                profilePic[key].innerHTML = `
+                <div class="profile-no-image profile-pic">${postsAuthorImage}</div>
+                `
+        }
     }
     const likeBtn = document.querySelectorAll('.like-button');
     for(let i = 0; i < likeBtn.length; i++){

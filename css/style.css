@@ -132,8 +132,10 @@ h1 {
 .profile-no-image {
     background: lightblue;
     color: #404040;
-    font-size: 1.2rem;
+    font-size: 1.5rem;
     font-weight: 800;
-    line-height: 1.2rem;
+    line-height: 60px;
     text-align: center;
+    width: 60px;
+    height: 60px;
 }
